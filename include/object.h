@@ -38,6 +38,8 @@ class Object { // generic obj type
             vel = acc = glm::vec2(0);
         }
         virtual ~Object() {}
-        virtual void draw(const SDLState &state, GameState &gs, float width, float height);
-        void drawDebug(const SDLState &state, GameState &gs, float width, float height); 
+        virtual void draw(const SDLState &state, GameState &gs);
+        void drawDebug(const SDLState &state, GameState &gs); 
 };
+
+Object createObject(SDL_Texture *tex);

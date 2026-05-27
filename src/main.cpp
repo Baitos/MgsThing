@@ -18,6 +18,8 @@
 #include "../include/update.h"
 #include "../include/draw.h"
 
+#include "../include/object.h"
+
 int main(int argc, char** argv) { 
     SDLState state;
     Resources res;
@@ -27,13 +29,18 @@ int main(int argc, char** argv) {
     // setup state, gs, res 
     init(state, gs, res);
 
+    Object player = createObject(res.texPlayer);
+    gs.player = player;
+
     // start game loop
     while (running) {
         advanceTime(state);
 
         input(state, gs, res);
         update(state, gs, res);
-        draw(state, gs, res);
+
+        draw(state, gs);
+        
     }
     
     res.unload();

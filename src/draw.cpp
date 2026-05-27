@@ -6,10 +6,12 @@
 #include "../include/gameState.h"
 
 
-void draw(const SDLState& state, GameState& gs, const Resources& res) {
-    SDL_SetRenderDrawColor(state.renderer, 64, 51, 83, 255);
+void draw(const SDLState& state, GameState& gs) {
+    SDL_SetRenderDrawColor(state.renderer, 64, 51, 83, 255); // draw background
     SDL_RenderClear(state.renderer);
 
+    gs.player.draw(state, gs);    
+    
     if (gs.debugMode) {
     // debug info
         SDL_SetRenderDrawColor(state.renderer, 255, 255, 255, 255);
@@ -17,6 +19,10 @@ void draw(const SDLState& state, GameState& gs, const Resources& res) {
                         std::format("FPS: {}", 
                         static_cast<int>(state.fs.FPS)).c_str());
     }
+
+
+
     //swap buffers and present
     SDL_RenderPresent(state.renderer);
 }
+

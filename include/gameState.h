@@ -4,10 +4,13 @@
 #include <vector>
 #include "../ext/glm/glm.hpp"
 #include "state.h"
+#include "object.h"
 
 struct GameState {    
     SDL_FRect mapViewport;
     bool debugMode;
+
+    Object player;
 
     GameState(const SDLState &state) {
         mapViewport = SDL_FRect {

@@ -12,6 +12,8 @@ struct SDL_Texture;
 struct Resources { 
     std::vector<SDL_Texture *> textures;
 
+    SDL_Texture *texPlayer;
+
     SDL_Texture *loadTexture(SDL_Renderer *renderer, const std::string &filepath);
     void load(SDLState &state);
     void unload();

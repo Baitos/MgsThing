@@ -30,6 +30,18 @@ void input(SDLState& state, GameState& gs, const Resources& res) {
                     else if (event.key.scancode == SDL_SCANCODE_F1) {
                         running = false;
                     }
+                    if (event.key.scancode == SDL_SCANCODE_D) {
+                        gs.player.pos.x += 32;
+                    }
+                    if (event.key.scancode == SDL_SCANCODE_A) {
+                        gs.player.pos.x -= 32;
+                    }
+                    if (event.key.scancode == SDL_SCANCODE_S) {
+                        gs.player.pos.y += 32;
+                    }
+                    if (event.key.scancode == SDL_SCANCODE_W) {
+                        gs.player.pos.y -= 32;
+                    }
                     break;
                 }
                 case SDL_EVENT_KEY_UP:
