@@ -21,6 +21,6 @@ struct GameState {
             .w = static_cast<float>(state.logW),
             .h = static_cast<float>(state.logH)
         };
-        debugMode = true;
+        debugMode = false;
     }
 };

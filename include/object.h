@@ -12,7 +12,16 @@ struct SDLState;
 struct GameState;
 struct Resources;
 
-
+enum direction {
+    U,
+    UR,
+    R,
+    DR,
+    D,
+    DL,
+    L,
+    UL
+};
 
 class Object { // generic obj type    
     public:
@@ -21,6 +30,8 @@ class Object { // generic obj type
         float width, height; // size for drawing
         bool debug; // should draw debug?
         int type;
+        direction dir; // which way to face sprite
+        
 
         int tileId; // what sprite of the tile sheet should this object use?
         Object() {           
@@ -33,6 +44,7 @@ class Object { // generic obj type
             };
             width = height = TILE_SIZE;
             tileId = BLANK_TILE;
+            dir = U;
             debug = true;
         }
         Object(glm::vec2 pos_) {
@@ -47,6 +59,7 @@ class Object { // generic obj type
             width = height = TILE_SIZE;
             tileId = BLANK_TILE;
             debug = true;
+            dir = U;
         }
 
         Object(glm::vec2 pos_, int tileID_) {
@@ -61,6 +74,7 @@ class Object { // generic obj type
             };
             width = height = TILE_SIZE;
             debug = true;
+            dir = U;
         }
 
         Object(glm::vec2 pos_, SDL_FRect colliderRect) {
@@ -68,6 +82,7 @@ class Object { // generic obj type
             collider = colliderRect;
             vel = acc = glm::vec2(0);
             debug = true;
+            dir = U;
         }
         virtual ~Object() {}
         virtual void draw(const SDLState &state, GameState &gs, const Resources &res);

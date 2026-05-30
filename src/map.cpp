@@ -34,7 +34,7 @@ void loadMap(SDLState& state, GameState& gs, Resources& res, const std::string& 
                     continue;
                 }
 
-                // get position based on row/col, get tileID from data
+                // get position based on row/col
                 Object l(glm::vec2(r * TILE_SIZE, c * TILE_SIZE), id - 1);
                 gs.mapTiles_.push_back(l);
             }          

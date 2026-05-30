@@ -30,7 +30,7 @@ void input(SDLState& state, GameState& gs, const Resources& res) {
                     else if (event.key.scancode == SDL_SCANCODE_F1) {
                         running = false;
                     }
-                    int VEL = 320;
+                    int VEL = 240;
                     if (event.key.scancode == SDL_SCANCODE_D) {
                         gs.player.vel.x = VEL;
                         gs.player.vel.y = 0;

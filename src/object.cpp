@@ -48,4 +48,23 @@ void Object::drawDebug(const SDLState &state, GameState &gs) {
 
 void Object::update(const SDLState &state, GameState &gs, const Resources &res, float deltaTime) {
     this->pos += this->vel * deltaTime;
+
+    // slow down player in x direction
+    const float factorX = this->vel.x > 0 ? -1.0f : 1.0f;
+    float amountX = factorX * this->acc.x * deltaTime;
+    if (std::abs(this->vel.x) < std::abs(amountX)) {
+        this->vel.x = 0;         
+    }
+    else {
+        this->vel.x += amountX;
+    }
+
+    const float factorY = this->vel.y > 0 ? -1.0f : 1.0f;
+    float amountY = factorY * this->acc.y * deltaTime;
+    if (std::abs(this->vel.y) < std::abs(amountY)) {
+        this->vel.y = 0;         
+    }
+    else {
+        this->vel.y += amountY;
+    }
 }

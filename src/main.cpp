@@ -32,6 +32,7 @@ int main(int argc, char** argv) {
 
 
     Object player(glm::vec2(0), 4); // pos 0, 0, player in tileset
+    player.acc = glm::vec2(160, 160); // default for now
     gs.player = player;
 
     loadMap(state, gs, res, "data/testMapMGS.json");
