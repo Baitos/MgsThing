@@ -11,8 +11,8 @@ SDL_Texture* Resources::loadTexture(SDL_Renderer *renderer, const std::string &f
     return tex;
 }
 
-void Resources::load(SDLState &state) { // First variable controls how many frames there are, second is how long each frame lasts (in seconds)
-    this->texPlayer = loadTexture(state.renderer, "data/logo.png");
+void Resources::load(SDLState &state) { // 
+    this->tileSet = loadTexture(state.renderer, "data/mgsThingTileset.png");
 }
 
 void Resources::unload() {

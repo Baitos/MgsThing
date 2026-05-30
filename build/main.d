@@ -1,30 +1,23 @@
 build/main.o: src/main.cpp \
- C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL.h \
- C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_stdinc.h \
+ C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_main.h \
  C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_platform_defines.h \
+ C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_stdinc.h \
  C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_begin_code.h \
  C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_close_code.h \
- C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_assert.h \
- C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_asyncio.h \
- C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_atomic.h \
+ C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_error.h \
+ C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_events.h \
  C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_audio.h \
  C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_endian.h \
- C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_error.h \
  C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_mutex.h \
+ C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_atomic.h \
  C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_thread.h \
  C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_properties.h \
  C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_iostream.h \
- C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_bits.h \
- C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_blendmode.h \
  C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_camera.h \
  C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_pixels.h \
  C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_surface.h \
+ C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_blendmode.h \
  C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_rect.h \
- C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_clipboard.h \
- C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_cpuinfo.h \
- C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_dialog.h \
- C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_video.h \
- C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_events.h \
  C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_gamepad.h \
  C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_guid.h \
  C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_joystick.h \
@@ -33,15 +26,24 @@ build/main.o: src/main.cpp \
  C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_keyboard.h \
  C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_keycode.h \
  C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_scancode.h \
+ C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_video.h \
  C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_mouse.h \
  C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_pen.h \
  C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_touch.h \
+ C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_init.h \
+ C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_main_impl.h \
+ C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL.h \
+ C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_assert.h \
+ C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_asyncio.h \
+ C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_bits.h \
+ C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_clipboard.h \
+ C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_cpuinfo.h \
+ C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_dialog.h \
  C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_filesystem.h \
  C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_gpu.h \
  C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_haptic.h \
  C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_hidapi.h \
  C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_hints.h \
- C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_init.h \
  C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_loadso.h \
  C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_locale.h \
  C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_log.h \
@@ -58,8 +60,6 @@ build/main.o: src/main.cpp \
  C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_tray.h \
  C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_version.h \
  C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_oldnames.h \
- C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_main.h \
- C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_main_impl.h \
  C:/Development\ Things/SDL3_image/x86_64-w64-mingw32/include/SDL3_image/SDL_image.h \
  src/../include/state.h src/../include/gameState.h \
  src/../include/../ext/glm/glm.hpp \
@@ -206,33 +206,26 @@ build/main.o: src/main.cpp \
  src/../include/object.h src/../include/animation.h \
  src/../include/timer.h src/../include/resources.h \
  src/../include/globals.h src/../include/init.h src/../include/input.h \
- src/../include/update.h src/../include/draw.h
-C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL.h:
-C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_stdinc.h:
+ src/../include/update.h src/../include/draw.h src/../include/map.h
+C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_main.h:
 C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_platform_defines.h:
+C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_stdinc.h:
 C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_begin_code.h:
 C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_close_code.h:
-C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_assert.h:
-C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_asyncio.h:
-C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_atomic.h:
+C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_error.h:
+C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_events.h:
 C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_audio.h:
 C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_endian.h:
-C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_error.h:
 C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_mutex.h:
+C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_atomic.h:
 C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_thread.h:
 C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_properties.h:
 C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_iostream.h:
-C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_bits.h:
-C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_blendmode.h:
 C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_camera.h:
 C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_pixels.h:
 C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_surface.h:
+C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_blendmode.h:
 C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_rect.h:
-C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_clipboard.h:
-C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_cpuinfo.h:
-C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_dialog.h:
-C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_video.h:
-C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_events.h:
 C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_gamepad.h:
 C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_guid.h:
 C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_joystick.h:
@@ -241,15 +234,24 @@ C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_sensor.h:
 C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_keyboard.h:
 C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_keycode.h:
 C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_scancode.h:
+C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_video.h:
 C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_mouse.h:
 C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_pen.h:
 C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_touch.h:
+C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_init.h:
+C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_main_impl.h:
+C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL.h:
+C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_assert.h:
+C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_asyncio.h:
+C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_bits.h:
+C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_clipboard.h:
+C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_cpuinfo.h:
+C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_dialog.h:
 C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_filesystem.h:
 C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_gpu.h:
 C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_haptic.h:
 C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_hidapi.h:
 C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_hints.h:
-C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_init.h:
 C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_loadso.h:
 C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_locale.h:
 C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_log.h:
@@ -266,8 +268,6 @@ C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_timer.h:
 C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_tray.h:
 C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_version.h:
 C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_oldnames.h:
-C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_main.h:
-C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_main_impl.h:
 C:/Development\ Things/SDL3_image/x86_64-w64-mingw32/include/SDL3_image/SDL_image.h:
 src/../include/state.h:
 src/../include/gameState.h:
@@ -421,3 +421,4 @@ src/../include/init.h:
 src/../include/input.h:
 src/../include/update.h:
 src/../include/draw.h:
+src/../include/map.h:

@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
+#include <SDL3/SDL.h>
 #include <SDL3_image/SDL_image.h>
 
 #include <vector>
@@ -19,19 +19,22 @@
 #include "../include/draw.h"
 
 #include "../include/object.h"
+#include "../include/map.h"
 
 int main(int argc, char** argv) { 
     SDLState state;
     Resources res;
+    // setup state, res 
+    init(state, res);
     // setup game state
     GameState gs(state);
 
-    // setup state, gs, res 
-    init(state, gs, res);
 
-    Object player = createObject(res.texPlayer);
+
+    Object player(glm::vec2(0), 4); // pos 0, 0, player in tileset
     gs.player = player;
 
+    loadMapInfo(state, gs, res, "data/testMapMGS.json");
     // start game loop
     while (running) {
         advanceTime(state);
@@ -39,7 +42,7 @@ int main(int argc, char** argv) {
         input(state, gs, res);
         update(state, gs, res);
 
-        draw(state, gs);
+        draw(state, gs, res);
         
     }
     

@@ -11,6 +11,8 @@ struct GameState {
     bool debugMode;
 
     Object player;
+    std::vector<Object> mapTiles_;
+    std::vector<Object> fgTiles_;
 
     GameState(const SDLState &state) {
         mapViewport = SDL_FRect {

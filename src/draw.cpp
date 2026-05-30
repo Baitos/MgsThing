@@ -6,18 +6,21 @@
 #include "../include/gameState.h"
 
 
-void draw(const SDLState& state, GameState& gs) {
+void draw(const SDLState& state, GameState& gs, Resources& res) {
     SDL_SetRenderDrawColor(state.renderer, 64, 51, 83, 255); // draw background
     SDL_RenderClear(state.renderer);
 
-    gs.player.draw(state, gs);    
+    for (Object &obj : gs.mapTiles_) { // render map tiles
+        obj.draw(state, gs, res);
+    }
+    gs.player.draw(state, gs, res);    
     
     if (gs.debugMode) {
     // debug info
         SDL_SetRenderDrawColor(state.renderer, 255, 255, 255, 255);
         SDL_RenderDebugText(state.renderer, 5, 5,
-                        std::format("FPS: {}", 
-                        static_cast<int>(state.fs.FPS)).c_str());
+                        std::format("FPS: {} X: {} Y: {}",  
+                        static_cast<int>(state.fs.FPS), gs.player.pos.x, gs.player.pos.y).c_str());
     }
 
 

@@ -30,17 +30,25 @@ void input(SDLState& state, GameState& gs, const Resources& res) {
                     else if (event.key.scancode == SDL_SCANCODE_F1) {
                         running = false;
                     }
+                    int VEL = 320;
                     if (event.key.scancode == SDL_SCANCODE_D) {
-                        gs.player.pos.x += 32;
+                        gs.player.vel.x = VEL;
+                        gs.player.vel.y = 0;
                     }
                     if (event.key.scancode == SDL_SCANCODE_A) {
-                        gs.player.pos.x -= 32;
+                        gs.player.vel.x = -VEL;
+                        gs.player.vel.y = 0;
                     }
                     if (event.key.scancode == SDL_SCANCODE_S) {
-                        gs.player.pos.y += 32;
+                        gs.player.vel.y = VEL;
+                        gs.player.vel.x = 0;
                     }
                     if (event.key.scancode == SDL_SCANCODE_W) {
-                        gs.player.pos.y -= 32;
+                        gs.player.vel.y = -VEL;
+                        gs.player.vel.x = 0;
+                    }
+                    if (event.key.scancode == SDL_SCANCODE_SPACE) {
+                        gs.player.vel = glm::vec2(0);
                     }
                     break;
                 }

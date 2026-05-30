@@ -1,5 +1,4 @@
-build/update.o: src/update.cpp src/../include/update.h \
- src/../include/gameState.h \
+build/map.o: src/map.cpp src/../include/map.h \
  C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL.h \
  C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_stdinc.h \
  C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_platform_defines.h \
@@ -59,7 +58,8 @@ build/update.o: src/update.cpp src/../include/update.h \
  C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_tray.h \
  C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_version.h \
  C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_oldnames.h \
- src/../include/../ext/glm/glm.hpp \
+ C:/Development\ Things/SDL3_image/x86_64-w64-mingw32/include/SDL3_image/SDL_image.h \
+ src/../include/object.h src/../include/../ext/glm/glm.hpp \
  src/../include/../ext/glm/detail/_fixes.hpp \
  src/../include/../ext/glm/detail/setup.hpp \
  src/../include/../ext/glm/detail/../simd/platform.h \
@@ -199,12 +199,11 @@ build/update.o: src/update.cpp src/../include/update.h \
  src/../include/../ext/glm/detail/type_half.hpp \
  src/../include/../ext/glm/detail/type_half.inl \
  src/../include/../ext/glm/integer.hpp \
- src/../include/../ext/glm/detail/func_integer.inl src/../include/state.h \
- src/../include/object.h src/../include/animation.h \
- src/../include/timer.h src/../include/resources.h \
- src/../include/globals.h
-src/../include/update.h:
-src/../include/gameState.h:
+ src/../include/../ext/glm/detail/func_integer.inl \
+ src/../include/animation.h src/../include/timer.h \
+ src/../include/resources.h src/../include/globals.h src/../ext/json.hpp \
+ src/../include/state.h src/../include/gameState.h
+src/../include/map.h:
 C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL.h:
 C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_stdinc.h:
 C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_platform_defines.h:
@@ -264,6 +263,8 @@ C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_timer.h:
 C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_tray.h:
 C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_version.h:
 C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_oldnames.h:
+C:/Development\ Things/SDL3_image/x86_64-w64-mingw32/include/SDL3_image/SDL_image.h:
+src/../include/object.h:
 src/../include/../ext/glm/glm.hpp:
 src/../include/../ext/glm/detail/_fixes.hpp:
 src/../include/../ext/glm/detail/setup.hpp:
@@ -405,9 +406,10 @@ src/../include/../ext/glm/detail/type_half.hpp:
 src/../include/../ext/glm/detail/type_half.inl:
 src/../include/../ext/glm/integer.hpp:
 src/../include/../ext/glm/detail/func_integer.inl:
-src/../include/state.h:
-src/../include/object.h:
 src/../include/animation.h:
 src/../include/timer.h:
 src/../include/resources.h:
 src/../include/globals.h:
+src/../ext/json.hpp:
+src/../include/state.h:
+src/../include/gameState.h:

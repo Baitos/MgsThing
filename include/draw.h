@@ -4,4 +4,4 @@ struct SDLState;
 struct GameState;
 struct Resources;
 
-void draw(const SDLState& state, GameState& gs);
+void draw(const SDLState& state, GameState& gs, Resources& res);

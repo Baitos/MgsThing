@@ -5,7 +5,7 @@
 #include "../include/state.h"
 #include "../include/resources.h"
 
-bool init(SDLState &state, GameState &gs, Resources &res) {
+bool init(SDLState &state, Resources &res) {
     state.width = 1600;
     state.height = 900;
     state.logW = 800;

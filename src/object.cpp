@@ -1,15 +1,23 @@
 #include "../include/object.h"
 #include "../include/state.h"
 #include "../include/gameState.h"
+#include <iostream>
 
-void Object::draw(const SDLState &state, GameState &gs) {
+void Object::draw(const SDLState &state, GameState &gs, const Resources &res) {
+    glm::vec2 tileSheetPos = glm::vec2(this->tileId % 4, this->tileId / 4);
+    SDL_FRect src { // gets tile in tileSet
+        .x = tileSheetPos.x * TILE_SIZE,
+        .y = tileSheetPos.y * TILE_SIZE,
+        .w = this->width,
+        .h = this->height
+    };
     SDL_FRect dst {
         .x = this->pos.x - gs.mapViewport.x,
         .y = this->pos.y - gs.mapViewport.y,
         .w = this->width,
         .h = this->height
     };
-    SDL_RenderTexture(state.renderer, this->texture, nullptr, &dst);
+    SDL_RenderTexture(state.renderer, res.tileSet, &src, &dst);
     this->drawDebug(state, gs);
 }
 
@@ -38,10 +46,6 @@ void Object::drawDebug(const SDLState &state, GameState &gs) {
     }
 }
 
-Object createObject(SDL_Texture *tex) {
-   Object o;
-   o.pos = glm::vec2(TILE_SIZE * 3, TILE_SIZE * 3);
-   o.texture = tex;
-
-   return o;
+void Object::update(const SDLState &state, GameState &gs, const Resources &res, float deltaTime) {
+    this->pos += this->vel * deltaTime;
 }
