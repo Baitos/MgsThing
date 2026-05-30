@@ -74,5 +74,3 @@ class Object { // generic obj type
         void drawDebug(const SDLState &state, GameState &gs); 
         void update(const SDLState &state, GameState &gs, const Resources &res, float deltaTime);
 };
-
-Object createObject(SDL_Texture *tex);

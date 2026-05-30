@@ -4,7 +4,7 @@
 #include <iostream>
 
 void Object::draw(const SDLState &state, GameState &gs, const Resources &res) {
-    glm::vec2 tileSheetPos = glm::vec2(this->tileId % 4, this->tileId / 4);
+    glm::vec2 tileSheetPos = glm::vec2(this->tileId % res.tileSetCols, this->tileId / res.tileSetCols);
     SDL_FRect src { // gets tile in tileSet
         .x = tileSheetPos.x * TILE_SIZE,
         .y = tileSheetPos.y * TILE_SIZE,

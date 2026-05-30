@@ -199,7 +199,9 @@ build/state.o: src/state.cpp \
  src/../include/../ext/glm/detail/type_half.hpp \
  src/../include/../ext/glm/detail/type_half.inl \
  src/../include/../ext/glm/integer.hpp \
- src/../include/../ext/glm/detail/func_integer.inl
+ src/../include/../ext/glm/detail/func_integer.inl \
+ src/../include/object.h src/../include/animation.h \
+ src/../include/timer.h src/../include/resources.h
 C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL.h:
 C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_stdinc.h:
 C:/Development\ Things/SDL/x86_64-w64-mingw32/include/SDL3/SDL_platform_defines.h:
@@ -403,3 +405,7 @@ src/../include/../ext/glm/detail/type_half.hpp:
 src/../include/../ext/glm/detail/type_half.inl:
 src/../include/../ext/glm/integer.hpp:
 src/../include/../ext/glm/detail/func_integer.inl:
+src/../include/object.h:
+src/../include/animation.h:
+src/../include/timer.h:
+src/../include/resources.h:

@@ -9,7 +9,7 @@
 
 using json = nlohmann::json;
 
-void loadMap(SDLState& state, GameState& gs, const Resources& res, const std::string& path) { // loads map info of given json file
+void loadMap(SDLState& state, GameState& gs, Resources& res, const std::string& path) { // loads map info of given json file
     std::ifstream file(path);
     if (!file.is_open()) {
         printf("failed to open map file\n");
@@ -22,9 +22,9 @@ void loadMap(SDLState& state, GameState& gs, const Resources& res, const std::st
     int width = mapJson["width"];
     int height = mapJson["height"];
 
+    res.tileSetCols = mapJson["tilesets"][0]["columns"].get<int>(); // get amount of columns in tileSet for splitting
     for (auto& layer : mapJson["layers"])
     {
-        std::cout << layer["data"].dump() << std::endl;
         //
         for (int c = 0; c < height; c++) {
             
