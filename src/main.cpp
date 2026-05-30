@@ -34,7 +34,7 @@ int main(int argc, char** argv) {
     Object player(glm::vec2(0), 4); // pos 0, 0, player in tileset
     gs.player = player;
 
-    loadMapInfo(state, gs, res, "data/testMapMGS.json");
+    loadMap(state, gs, res, "data/testMapMGS.json");
     // start game loop
     while (running) {
         advanceTime(state);
