@@ -1,6 +1,7 @@
 #pragma once
 
 #include <stdint.h>
+#include "input.h"
 
 struct SDL_Window;
 struct SDL_Renderer;
@@ -32,7 +33,8 @@ struct SDLState
     const bool *keys;
 
     FrameState fs;
-    
+    InputManager im;
+
     SDLState() : keys(SDL_GetKeyboardState(nullptr)) {
     }
 };

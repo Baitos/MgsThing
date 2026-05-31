@@ -31,20 +31,19 @@ int main(int argc, char** argv) {
 
 
 
-    Object player(glm::vec2(0), 4); // pos 0, 0, player in tileset
-    player.acc = glm::vec2(160, 160); // default for now
+    Player player(glm::vec2(0), 4); // pos 0, 0, player in tileset
+    float acc = 2000.0f;
+    player.acc = glm::vec2(acc, acc); // default for now
     gs.player = player;
 
     loadMap(state, gs, res, "data/testMapMGS.json");
     // start game loop
     while (running) {
         advanceTime(state);
-
+ 
         input(state, gs, res);
         update(state, gs, res);
-
         draw(state, gs, res);
-        
     }
     
     res.unload();

@@ -46,25 +46,47 @@ void Object::drawDebug(const SDLState &state, GameState &gs) {
     }
 }
 
-void Object::update(const SDLState &state, GameState &gs, const Resources &res, float deltaTime) {
+void Object::update(const SDLState &state, GameState &gs, const Resources &res, float deltaTime) {    
+    this->pos += this->vel * deltaTime;
+}
+
+void Player::update(const SDLState &state, GameState &gs, const Resources &res, float deltaTime) {
+    
+    // do things based on inputs
+    InputState inputs = state.im.inputState;
+    glm::vec2 inputDir(0.0f);
+    if (inputs.current & Up) {
+        inputDir.y -= 1.0f;
+    }
+    if (inputs.current & Down) {
+        inputDir.y += 1.0f;
+    }
+    if (inputs.current & Left) {
+        inputDir.x -= 1.0f;
+    }
+    if (inputs.current & Right) {
+        inputDir.x += 1.0f;
+    }
+
+    if (glm::dot(inputDir, inputDir) > 0.0f) { // normalize for diagonal movement
+        inputDir = glm::normalize(inputDir);
+    }
+
+    // accelerate towards max velocity in inputted direction
+    glm::vec2 desiredVelocity = inputDir * this->maxSpeed;
+    glm::vec2 delta = desiredVelocity - this->vel;
+    float distance = glm::length(delta);
+    float maxDelta = this->acc.x * deltaTime;
+
+    if (distance <= maxDelta) {
+        this->vel = desiredVelocity;
+    } else {
+        this->vel += glm::normalize(delta) * maxDelta;
+    }
+
+
+    std::cout << "VelX: " << this->vel.x << " VelY: " << this->vel.y << std::endl;
     this->pos += this->vel * deltaTime;
 
-    // slow down player in x direction
-    const float factorX = this->vel.x > 0 ? -1.0f : 1.0f;
-    float amountX = factorX * this->acc.x * deltaTime;
-    if (std::abs(this->vel.x) < std::abs(amountX)) {
-        this->vel.x = 0;         
-    }
-    else {
-        this->vel.x += amountX;
-    }
-
-    const float factorY = this->vel.y > 0 ? -1.0f : 1.0f;
-    float amountY = factorY * this->acc.y * deltaTime;
-    if (std::abs(this->vel.y) < std::abs(amountY)) {
-        this->vel.y = 0;         
-    }
-    else {
-        this->vel.y += amountY;
-    }
+    
 }

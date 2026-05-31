@@ -13,6 +13,7 @@ struct GameState;
 struct Resources;
 
 enum direction {
+    NONE,
     U,
     UR,
     R,
@@ -88,4 +89,20 @@ class Object { // generic obj type
         virtual void draw(const SDLState &state, GameState &gs, const Resources &res);
         void drawDebug(const SDLState &state, GameState &gs); 
         void update(const SDLState &state, GameState &gs, const Resources &res, float deltaTime);
+};
+
+class Player : public Object {   
+    public:
+        float maxSpeed;
+        bool isBeingMoved; // set to true if an input is being held
+
+        virtual void update(const SDLState &state, GameState &gs, const Resources &res, float deltaTime);
+        Player() : Object() {
+            maxSpeed = 250.0f;
+            isBeingMoved = false;
+        }
+        Player(glm::vec2 pos_, int tileID_) : Object(pos_, tileID_) {
+            maxSpeed = 250.0f;
+            isBeingMoved = false;
+        }
 };

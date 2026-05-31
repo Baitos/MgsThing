@@ -10,7 +10,7 @@ struct GameState {
     SDL_FRect mapViewport;
     bool debugMode;
 
-    Object player;
+    Player player;
     std::vector<Object> mapTiles_;
     std::vector<Object> fgTiles_;
 
