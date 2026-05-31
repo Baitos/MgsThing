@@ -3,6 +3,20 @@
 #include "../include/gameState.h"
 #include <iostream>
 
+void Player::handleRotation(float angle, float deltaTime, bool isStrafing) {
+    if (isStrafing) {
+        return;
+    }
+    float rotDelta = this->rotationSpeed * deltaTime;
+    float deltaAngle = std::fmod(angle - this->angle + 540.0f, 360.0f) - 180.0f;
+    if (std::abs(deltaAngle) <= rotDelta) {
+            this->angle = angle;
+        } else {
+            this->angle += rotDelta * glm::sign(deltaAngle);
+        }
+    this->angle = std::fmod(this->angle + 360.0f, 360.0f); // normalize player angle
+}
+
 void Player::update(const SDLState &state, GameState &gs, const Resources &res, float deltaTime) {
     
     // do things based on inputs
@@ -37,19 +51,20 @@ void Player::update(const SDLState &state, GameState &gs, const Resources &res, 
         this->vel += glm::normalize(delta) * maxDelta;
     }
 
-
-    //std::cout << "VelX: " << this->vel.x << " VelY: " << this->vel.y << std::endl;
     direction facing;
-    if (glm::length(inputDir) == 0) {
+    if (glm::length(inputDir) == 0.0f) {
         facing = this->dir;
     } else {
-        float angle = glm::degrees(glm::atan(inputDir.y, inputDir.x)) + 90.0f;
+        // find desired angle
+        float angle = glm::degrees(std::atan2(inputDir.x, -inputDir.y));
         angle = std::fmod(angle + 360.0f, 360.0f); // normalize
-        facing = static_cast<direction>(static_cast<int>((angle + 22.5f) / 45.0f) % 8); // get direction
+
+        this->handleRotation(angle, deltaTime, inputs.current & Strafe); // if not strafing, rotate
+        facing = static_cast<direction>(static_cast<int>((this->angle + 22.5f) / 45.0f) % 8); // get direction
         this->dir = facing;
         
     }
-    //std::cout << facing << std::endl;
+    std::cout << "Facing: " << facing << " PlayerAngle: " << this->angle << std::endl;
     switch (facing) {
         case U:
         {

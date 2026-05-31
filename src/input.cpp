@@ -59,6 +59,9 @@ void InputManager::handleInput(const bool *keys) {
     if (keys[SDL_SCANCODE_D]) {
         is.current |= Right;
     }
+    if (keys[SDL_SCANCODE_LSHIFT]) {
+        is.current |= Strafe;
+    }
 
     // newly pressed buttons are anything current and anything not previously pressed
     is.pressed = is.current & ~previous;

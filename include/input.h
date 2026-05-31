@@ -10,7 +10,9 @@ enum Inputs : uint32_t {
     Up = 1 << 0,
     Right = 1 << 1,
     Down = 1 << 2, 
-    Left = 1 << 3
+    Left = 1 << 3,
+
+    Strafe = 1 << 4
 };
 
 struct InputState {

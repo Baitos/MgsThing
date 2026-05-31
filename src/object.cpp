@@ -33,14 +33,6 @@ void Object::drawDebug(const SDLState &state, GameState &gs) {
 
         SDL_SetRenderDrawColor(state.renderer, 255, 0, 0, 150);
         SDL_RenderFillRect(state.renderer, &rectA);
-        SDL_FRect sensor{  
-            .x = this->pos.x + this->collider.x - gs.mapViewport.x,
-            .y = this->pos.y + this->collider.y + this->collider.h - gs.mapViewport.y,
-            .w = this->collider.w, 
-            .h = 1
-        };
-        SDL_SetRenderDrawColor(state.renderer, 0, 0, 255, 150);
-        SDL_RenderFillRect(state.renderer, &sensor);
 
         SDL_SetRenderDrawBlendMode(state.renderer, SDL_BLENDMODE_NONE);
     }

@@ -29,7 +29,9 @@ class Player : public Object {
         float maxSpeed;
         bool isBeingMoved; // set to true if an input is being held
         direction dir; // which way to face sprite
+        float angle; // angle player is facing
         bool flipSprite; // should we flip the sprite?
+        float rotationSpeed; // how many degrees should the player character rotate in a second?
 
         virtual void update(const SDLState &state, GameState &gs, const Resources &res, float deltaTime);
         Player() : Object() {
@@ -37,15 +39,20 @@ class Player : public Object {
             isBeingMoved = false;
             dir = U;
             type = OBJ_PLAYER;
+            angle = 0.0f;
             flipSprite = false;
+            rotationSpeed = 360.0f; // should be half a second at 360 to turn around
         }
         Player(glm::vec2 pos_, int tileID_) : Object(pos_, tileID_) {
             maxSpeed = 250.0f;
             isBeingMoved = false;
             dir = U;
             type = OBJ_PLAYER;
+            angle = 0.0f;
             flipSprite = false;
+            rotationSpeed = 360.0f;
         }
         virtual ~Player() {}
         void draw(const SDLState &state, GameState &gs, const Resources &res);
+        void handleRotation(float angle, float deltaTime, bool isStrafing);
 };
