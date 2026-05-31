@@ -20,7 +20,6 @@
 
 #include "../include/object.h"
 #include "../include/player.h"
-#include "../include/map.h"
 
 int main(int argc, char** argv) { 
     SDLState state;
@@ -28,16 +27,8 @@ int main(int argc, char** argv) {
     // setup state, res 
     init(state, res);
     // setup game state
-    GameState gs(state);
+    GameState gs(state, res);
 
-
-
-    Player player(glm::vec2(0), 4); // pos 0, 0, player in tileset
-    float acc = 2000.0f;
-    player.acc = glm::vec2(acc, acc); // default for now
-    gs.player = player;
-
-    loadMap(state, gs, res, "data/testMapMGS.json");
     // start game loop
     while (running) {
         advanceTime(state);

@@ -3,6 +3,10 @@
 #include "../include/gameState.h"
 #include <iostream>
 
+void Object::update(const SDLState &state, GameState &gs, const Resources &res, float deltaTime) {    
+    this->pos += this->vel * deltaTime;
+}
+
 void Object::draw(const SDLState &state, GameState &gs, const Resources &res) {
     glm::vec2 tileSheetPos = glm::vec2(this->tileId % res.tileSetCols, this->tileId / res.tileSetCols);
     SDL_FRect src { // gets tile in tileSet
@@ -36,8 +40,4 @@ void Object::drawDebug(const SDLState &state, GameState &gs) {
 
         SDL_SetRenderDrawBlendMode(state.renderer, SDL_BLENDMODE_NONE);
     }
-}
-
-void Object::update(const SDLState &state, GameState &gs, const Resources &res, float deltaTime) {    
-    this->pos += this->vel * deltaTime;
 }

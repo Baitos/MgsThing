@@ -1,15 +1,21 @@
-#include "../include/map.h"
-
-#include "../ext/json.hpp"
+#include <SDL3/SDL.h>
 #include <fstream>
 #include <iostream>
+
 #include "../include/state.h"
 #include "../include/gameState.h"
 #include "../include/resources.h"
+#include "../ext/json.hpp"
 
 using json = nlohmann::json;
 
-void loadMap(SDLState& state, GameState& gs, Resources& res, const std::string& path) { // loads map info of given json file
+void GameState::init(const SDLState &state, Resources &res) {
+    float acc = 2000.0f; 
+    this->player.acc = glm::vec2(acc, acc);
+    this->loadMap(state, res, "data/testMapMGS.json");
+}
+
+void GameState::loadMap(const SDLState& state, Resources& res, const std::string& path) { // loads map info of given json file
     std::ifstream file(path);
     if (!file.is_open()) {
         printf("failed to open map file\n");
@@ -33,17 +39,15 @@ void loadMap(SDLState& state, GameState& gs, Resources& res, const std::string& 
                 if (id == 0) { // don't make objects for blank tiles
                     continue;
                 }
-
                 // get position based on row/col
-                Object l(glm::vec2(r * TILE_SIZE, c * TILE_SIZE), id - 1);
+                Object o(glm::vec2(r * TILE_SIZE, c * TILE_SIZE), id - 1);
                 if (layer["name"] == "Foreground") {
-                    gs.fgTiles_.push_back(l);
+                    this->fgTiles_.push_back(o);
                 } else {
-                    gs.mapTiles_.push_back(l);
+                    this->mapTiles_.push_back(o);
                 }
             }          
         }
-        std::cout << std::endl;
     }
 }
 

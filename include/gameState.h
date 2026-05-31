@@ -15,13 +15,18 @@ struct GameState {
     std::vector<Object> mapTiles_;
     std::vector<Object> fgTiles_;
 
-    GameState(const SDLState &state) {
-        mapViewport = SDL_FRect {
-            .x = 0,
-            .y = 0,
-            .w = static_cast<float>(state.logW),
-            .h = static_cast<float>(state.logH)
-        };
-        debugMode = false;
+    GameState(const SDLState &state, Resources &res) 
+        : mapViewport {
+            0.0f, 
+            0.0f,
+            (float)state.logW,
+            (float)state.logH
+        },
+        debugMode(false),
+        player(glm::vec2(0.f), 4)
+    {
+        init(state, res);
     }
+    void init(const SDLState &state, Resources &res);
+    void loadMap(const SDLState& state, Resources& res, const std::string& path);
 };

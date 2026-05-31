@@ -64,7 +64,7 @@ void Player::update(const SDLState &state, GameState &gs, const Resources &res, 
         this->dir = facing;
         
     }
-    std::cout << "Facing: " << facing << " PlayerAngle: " << this->angle << std::endl;
+    //std::cout << "Facing: " << facing << " PlayerAngle: " << this->angle << std::endl;
     switch (facing) {
         case U:
         {
@@ -116,7 +116,7 @@ void Player::update(const SDLState &state, GameState &gs, const Resources &res, 
         }
     }
 
-    this->pos += this->vel * deltaTime;
+    Object::update(state, gs, res, deltaTime); // do generic update
 }
 
 void Player::draw(const SDLState &state, GameState &gs, const Resources &res) {
@@ -133,12 +133,7 @@ void Player::draw(const SDLState &state, GameState &gs, const Resources &res) {
         .w = this->width,
         .h = this->height
     };
-    SDL_FlipMode flipMode;
-    if (this->flipSprite) {
-        flipMode = SDL_FLIP_HORIZONTAL;
-    } else {
-        flipMode = SDL_FLIP_NONE;
-    }
+    SDL_FlipMode flipMode = this->flipSprite ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE; // flip sprite?
     SDL_RenderTextureRotated(state.renderer, res.tileSet, &src, &dst, 0, nullptr, flipMode);
     this->drawDebug(state, gs);
 }
