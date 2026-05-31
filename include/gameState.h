@@ -5,6 +5,7 @@
 #include "../ext/glm/glm.hpp"
 #include "state.h"
 #include "object.h"
+#include "player.h"
 
 struct GameState {    
     SDL_FRect mapViewport;

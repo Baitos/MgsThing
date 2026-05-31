@@ -19,6 +19,7 @@
 #include "../include/draw.h"
 
 #include "../include/object.h"
+#include "../include/player.h"
 #include "../include/map.h"
 
 int main(int argc, char** argv) { 

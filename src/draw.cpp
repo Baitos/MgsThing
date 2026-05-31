@@ -14,7 +14,9 @@ void draw(const SDLState& state, GameState& gs, Resources& res) {
         obj.draw(state, gs, res);
     }
     gs.player.draw(state, gs, res);    
-    
+    for (Object &obj : gs.fgTiles_) { // render fg tiles
+        obj.draw(state, gs, res);
+    }
     if (gs.debugMode) {
     // debug info
         SDL_SetRenderDrawColor(state.renderer, 255, 255, 255, 255);

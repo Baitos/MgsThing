@@ -36,7 +36,11 @@ void loadMap(SDLState& state, GameState& gs, Resources& res, const std::string& 
 
                 // get position based on row/col
                 Object l(glm::vec2(r * TILE_SIZE, c * TILE_SIZE), id - 1);
-                gs.mapTiles_.push_back(l);
+                if (layer["name"] == "Foreground") {
+                    gs.fgTiles_.push_back(l);
+                } else {
+                    gs.mapTiles_.push_back(l);
+                }
             }          
         }
         std::cout << std::endl;

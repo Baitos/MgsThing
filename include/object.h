@@ -12,16 +12,10 @@ struct SDLState;
 struct GameState;
 struct Resources;
 
-enum direction {
-    NONE,
-    U,
-    UR,
-    R,
-    DR,
-    D,
-    DL,
-    L,
-    UL
+enum objectType {
+    NO_TYPE = 0,
+    OBJ_PLAYER,
+    OBJ_LAND
 };
 
 class Object { // generic obj type    
@@ -30,9 +24,7 @@ class Object { // generic obj type
         SDL_FRect collider; // rectangle for collision
         float width, height; // size for drawing
         bool debug; // should draw debug?
-        int type;
-        direction dir; // which way to face sprite
-        
+        objectType type;   
 
         int tileId; // what sprite of the tile sheet should this object use?
         Object() {           
@@ -45,7 +37,7 @@ class Object { // generic obj type
             };
             width = height = TILE_SIZE;
             tileId = BLANK_TILE;
-            dir = U;
+            type = NO_TYPE;
             debug = true;
         }
         Object(glm::vec2 pos_) {
@@ -59,8 +51,8 @@ class Object { // generic obj type
             };
             width = height = TILE_SIZE;
             tileId = BLANK_TILE;
+            type = NO_TYPE;
             debug = true;
-            dir = U;
         }
 
         Object(glm::vec2 pos_, int tileID_) {
@@ -74,35 +66,20 @@ class Object { // generic obj type
                 .h = (float)TILE_SIZE
             };
             width = height = TILE_SIZE;
+            type = NO_TYPE;
             debug = true;
-            dir = U;
         }
 
         Object(glm::vec2 pos_, SDL_FRect colliderRect) {
             pos = pos_;       
             collider = colliderRect;
             vel = acc = glm::vec2(0);
+            tileId = BLANK_TILE;
+            type = NO_TYPE;
             debug = true;
-            dir = U;
         }
         virtual ~Object() {}
         virtual void draw(const SDLState &state, GameState &gs, const Resources &res);
         void drawDebug(const SDLState &state, GameState &gs); 
         void update(const SDLState &state, GameState &gs, const Resources &res, float deltaTime);
-};
-
-class Player : public Object {   
-    public:
-        float maxSpeed;
-        bool isBeingMoved; // set to true if an input is being held
-
-        virtual void update(const SDLState &state, GameState &gs, const Resources &res, float deltaTime);
-        Player() : Object() {
-            maxSpeed = 250.0f;
-            isBeingMoved = false;
-        }
-        Player(glm::vec2 pos_, int tileID_) : Object(pos_, tileID_) {
-            maxSpeed = 250.0f;
-            isBeingMoved = false;
-        }
 };
