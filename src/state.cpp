@@ -12,7 +12,7 @@ bool initialize(SDLState &state) {
         printf("Error Initializing SDL3\n");
         initSuccess = false;
     } 
-    state.window = SDL_CreateWindow("SDL OPT", state.width, state.height, SDL_WINDOW_RESIZABLE);
+    state.window = SDL_CreateWindow("Metal Gear Versus", state.width, state.height, SDL_WINDOW_RESIZABLE);
     if (!state.window) {
         SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", "Error Creating Window", nullptr);
         printf("Error Creating Window\n");

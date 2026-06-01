@@ -41,6 +41,11 @@ void Player::update(const SDLState &state, GameState &gs, const Resources &res, 
 
     // accelerate towards max velocity in inputted direction
     glm::vec2 desiredVel = inputDir * this->maxSpeed;
+
+    if (inputs.current & Lock) { // if locked, we want to slow down
+        desiredVel = glm::vec2(0.0f);
+    }
+    
     glm::vec2 delta = desiredVel - this->vel;
     float distance = glm::length(delta);
     float maxDelta = this->acc.x * deltaTime;
@@ -50,6 +55,8 @@ void Player::update(const SDLState &state, GameState &gs, const Resources &res, 
     } else {
         this->vel += glm::normalize(delta) * maxDelta;
     }
+
+    
 
     direction facing;
     if (glm::length(inputDir) == 0.0f) {
@@ -117,6 +124,7 @@ void Player::update(const SDLState &state, GameState &gs, const Resources &res, 
     }
 
     Object::update(state, gs, res, deltaTime); // do generic update
+
 }
 
 void Player::draw(const SDLState &state, GameState &gs, const Resources &res) {

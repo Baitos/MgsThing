@@ -12,7 +12,8 @@ enum Inputs : uint32_t {
     Down = 1 << 2, 
     Left = 1 << 3,
 
-    Strafe = 1 << 4
+    Strafe = 1 << 4,
+    Lock = 1 << 5
 };
 
 struct InputState {
@@ -27,4 +28,4 @@ class InputManager {
         void handleInput(const bool *keys); 
 };
 
-void input(SDLState& state, GameState& gs, const Resources& res);
+void input(SDLState& state, GameState& gs);

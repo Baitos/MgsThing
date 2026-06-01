@@ -5,10 +5,7 @@
 #include "../include/input.h"
 #include "../include/state.h"
 
-#include <iostream>
-#include <bitset>
-
-void input(SDLState& state, GameState& gs, const Resources& res) {
+void input(SDLState& state, GameState& gs) {
     SDL_Event event { 0 };
     while (SDL_PollEvent(&event)) {
         switch (event.type) {
@@ -62,13 +59,16 @@ void InputManager::handleInput(const bool *keys) {
     if (keys[SDL_SCANCODE_LSHIFT]) {
         is.current |= Strafe;
     }
+    if (keys[SDL_SCANCODE_LSHIFT]) {
+        is.current |= Strafe;
+    }
+    if (keys[SDL_SCANCODE_LCTRL]) {
+        is.current |= Lock;
+    }
 
     // newly pressed buttons are anything current and anything not previously pressed
     is.pressed = is.current & ~previous;
 
     // newly released buttons are anything previous and currently not held
     is.released = previous & ~is.current;
-
-    //std::cout << "Current: " << std::bitset<32>(is.current) << std::endl;
-
 }

@@ -33,7 +33,7 @@ int main(int argc, char** argv) {
     while (running) {
         advanceTime(state);
  
-        input(state, gs, res);
+        input(state, gs);
         update(state, gs, res);
         draw(state, gs, res);
     }
