@@ -30,6 +30,7 @@ void input(SDLState& state, GameState& gs) {
                 else if (event.key.scancode == SDL_SCANCODE_F1) {
                     running = false;
                 }
+                
                 break;
             }
         }
@@ -59,11 +60,15 @@ void InputManager::handleInput(const bool *keys) {
     if (keys[SDL_SCANCODE_LSHIFT]) {
         is.current |= Strafe;
     }
-    if (keys[SDL_SCANCODE_LSHIFT]) {
-        is.current |= Strafe;
-    }
     if (keys[SDL_SCANCODE_LCTRL]) {
         is.current |= Lock;
+    }
+
+    if (keys[SDL_SCANCODE_F2]) { // testing purposes
+        is.current |= Save;
+    }
+    if (keys[SDL_SCANCODE_F3]) {
+        is.current |= Restore;
     }
 
     // newly pressed buttons are anything current and anything not previously pressed

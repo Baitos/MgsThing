@@ -13,7 +13,10 @@ enum Inputs : uint32_t {
     Left = 1 << 3,
 
     Strafe = 1 << 4,
-    Lock = 1 << 5
+    Lock = 1 << 5,
+
+    Save = 1 << 10,
+    Restore = 1 << 11
 };
 
 struct InputState {

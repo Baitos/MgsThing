@@ -6,16 +6,6 @@
 #include "../include/resources.h"
 
 bool init(SDLState &state, Resources &res) {
-    state.width = 1600;
-    state.height = 900;
-    state.logW = 800;
-    state.logH = 450;
-
-    state.xRatio = (float)state.logW / state.width; 
-    state.yRatio = (float)state.logH / state.height;
-
-
-
     if (!initialize(state)) {
         return 1;
     }

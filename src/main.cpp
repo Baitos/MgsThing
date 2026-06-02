@@ -28,13 +28,30 @@ int main(int argc, char** argv) {
     init(state, res);
     // setup game state
     GameState gs(state, res);
-
+    GameState snapshot = gs;
     // start game loop
+    
+    double accumulator = 0.0;
+    
     while (running) {
         advanceTime(state);
- 
+        accumulator += state.fs.deltaTime;
+
         input(state, gs);
-        update(state, gs, res);
+        if (state.im.inputState.pressed & Save) { // testing purposes
+            snapshot = gs;
+        }
+        else if (state.im.inputState.pressed & Restore) {
+            gs = snapshot;
+        }
+
+        while (accumulator >= TICK_RATE) {
+            update(state, gs, res, TICK_RATE);
+            accumulator -= TICK_RATE;
+
+        }
+        
+        double alpha = accumulator / TICK_RATE; // will be for lerping later
         draw(state, gs, res);
     }
     

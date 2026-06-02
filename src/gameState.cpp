@@ -32,19 +32,19 @@ void GameState::loadMap(const SDLState& state, Resources& res, const std::string
     for (auto& layer : mapJson["layers"])
     {
         //
-        for (int c = 0; c < height; c++) {
+        for (int r = 0; r < height; r++) {
             
-            for (int r = 0; r < width; r++) {
-                int id = layer["data"][c * width + r].get<int>();
+            for (int c = 0; c < width; c++) {
+                int id = layer["data"][r * width + c].get<int>();
                 if (id == 0) { // don't make objects for blank tiles
                     continue;
                 }
                 // get position based on row/col
-                Object o(glm::vec2(r * TILE_SIZE, c * TILE_SIZE), id - 1);
+                Object o(glm::vec2(c * TILE_SIZE, r * TILE_SIZE), id - 1);
                 if (layer["name"] == "Foreground") {
-                    this->fgTiles_.push_back(o);
+                    this->fgTiles.push_back(o);
                 } else {
-                    this->mapTiles_.push_back(o);
+                    this->mapTiles.push_back(o);
                 }
             }          
         }

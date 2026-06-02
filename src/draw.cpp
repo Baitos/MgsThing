@@ -10,11 +10,11 @@ void draw(const SDLState& state, GameState& gs, Resources& res) {
     SDL_SetRenderDrawColor(state.renderer, 64, 51, 83, 255); // draw background
     SDL_RenderClear(state.renderer);
 
-    for (Object &obj : gs.mapTiles_) { // render map tiles
+    for (Object &obj : gs.mapTiles) { // render map tiles
         obj.draw(state, gs, res);
     }
     gs.player.draw(state, gs, res);    
-    for (Object &obj : gs.fgTiles_) { // render fg tiles
+    for (Object &obj : gs.fgTiles) { // render fg tiles
         obj.draw(state, gs, res);
     }
     if (gs.debugMode) {

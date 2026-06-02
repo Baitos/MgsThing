@@ -81,5 +81,5 @@ class Object { // generic obj type
         virtual ~Object() {}
         virtual void draw(const SDLState &state, GameState &gs, const Resources &res);
         void drawDebug(const SDLState &state, GameState &gs); 
-        void update(const SDLState &state, GameState &gs, const Resources &res, float deltaTime);
+        void update(GameState &gs, const Resources &res, double tickRate);
 };

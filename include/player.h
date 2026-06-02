@@ -33,7 +33,6 @@ class Player : public Object {
         bool flipSprite; // should we flip the sprite?
         float rotationSpeed; // how many degrees should the player character rotate in a second?
 
-        virtual void update(const SDLState &state, GameState &gs, const Resources &res, float deltaTime);
         Player() : Object() {
             maxSpeed = 250.0f;
             isBeingMoved = false;
@@ -53,6 +52,7 @@ class Player : public Object {
             rotationSpeed = 360.0f;
         }
         virtual ~Player() {}
+        virtual void update(const InputState &inputs, GameState &gs, const Resources &res, double tickRate);
         void draw(const SDLState &state, GameState &gs, const Resources &res);
-        void handleRotation(float angle, float deltaTime, bool isStrafing);
+        void handleRotation(float angle, float tickRate, bool isStrafing);
 };

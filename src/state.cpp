@@ -5,6 +5,8 @@
 #include "../include/globals.h"
 #include "../include/gameState.h"
 
+#include <iostream>
+
 bool initialize(SDLState &state) {
     bool initSuccess = true;
     if (!SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO)) {
@@ -30,6 +32,7 @@ bool initialize(SDLState &state) {
     state.keys = SDL_GetKeyboardState(nullptr);
 
     state.fs.prevTime = SDL_GetTicks();
+    state.fs.nowTime = SDL_GetPerformanceCounter();
 
     //SDL_SetRenderVSync(state.renderer, 1);
 
@@ -50,12 +53,20 @@ void cleanup(SDLState &state) {
 void advanceTime(SDLState &state) { // run deltaTime logic
     FrameState &fs = state.fs;
     fs.prevTime = fs.nowTime;
-    fs.nowTime = SDL_GetTicks(); // take time from previous frame to calculate delta
+    fs.nowTime = SDL_GetPerformanceCounter(); // take time from previous frame to calculate delta
+    
+    uint64_t freq = SDL_GetPerformanceFrequency();
+    fs.deltaTime = (float)(fs.nowTime - fs.prevTime) / (float)freq;
+
+    const float MAX_TIME = 0.25f;
+    if (fs.deltaTime > MAX_TIME) { // spiral of death
+        fs.deltaTime = MAX_TIME;
+    };
+
     fs.frames++;
-    if (fs.nowTime > fs.lastTime + 1000) { // fps counter
+    if (fs.nowTime - fs.lastTime >= freq) { // fps counter
         fs.lastTime = fs.nowTime;
         fs.FPS = fs.frames;           
         fs.frames = 0;
     }
-    fs.deltaTime = (fs.nowTime - fs.prevTime) / 1000.0f; // convert to seconds from ms
 }

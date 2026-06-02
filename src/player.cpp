@@ -3,11 +3,11 @@
 #include "../include/gameState.h"
 #include <iostream>
 
-void Player::handleRotation(float angle, float deltaTime, bool isStrafing) {
+void Player::handleRotation(float angle, float tickRate, bool isStrafing) {
     if (isStrafing) {
         return;
     }
-    float rotDelta = this->rotationSpeed * deltaTime;
+    float rotDelta = this->rotationSpeed * tickRate;
     float deltaAngle = std::fmod(angle - this->angle + 540.0f, 360.0f) - 180.0f;
     if (std::abs(deltaAngle) <= rotDelta) {
             this->angle = angle;
@@ -17,10 +17,9 @@ void Player::handleRotation(float angle, float deltaTime, bool isStrafing) {
     this->angle = std::fmod(this->angle + 360.0f, 360.0f); // normalize player angle
 }
 
-void Player::update(const SDLState &state, GameState &gs, const Resources &res, float deltaTime) {
+void Player::update(const InputState &inputs, GameState &gs, const Resources &res, double tickRate) {
     
     // do things based on inputs
-    InputState inputs = state.im.inputState;
     glm::vec2 inputDir(0.0f);
     if (inputs.current & Up) {
         inputDir.y -= 1.0f;
@@ -45,10 +44,10 @@ void Player::update(const SDLState &state, GameState &gs, const Resources &res, 
     if (inputs.current & Lock) { // if locked, we want to slow down
         desiredVel = glm::vec2(0.0f);
     }
-    
+
     glm::vec2 delta = desiredVel - this->vel;
     float distance = glm::length(delta);
-    float maxDelta = this->acc.x * deltaTime;
+    float maxDelta = this->acc.x * tickRate;
 
     if (distance <= maxDelta) {
         this->vel = desiredVel;
@@ -66,7 +65,7 @@ void Player::update(const SDLState &state, GameState &gs, const Resources &res, 
         float angle = glm::degrees(std::atan2(inputDir.x, -inputDir.y));
         angle = std::fmod(angle + 360.0f, 360.0f); // normalize
 
-        this->handleRotation(angle, deltaTime, inputs.current & Strafe); // if not strafing, rotate
+        this->handleRotation(angle, tickRate, inputs.current & Strafe); // if not strafing, rotate
         facing = static_cast<direction>(static_cast<int>((this->angle + 22.5f) / 45.0f) % 8); // get direction
         this->dir = facing;
         
@@ -123,7 +122,7 @@ void Player::update(const SDLState &state, GameState &gs, const Resources &res, 
         }
     }
 
-    Object::update(state, gs, res, deltaTime); // do generic update
+    Object::update(gs, res, tickRate); // do generic update
 
 }
 

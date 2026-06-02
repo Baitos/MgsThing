@@ -3,8 +3,8 @@
 #include "../include/gameState.h"
 #include <iostream>
 
-void Object::update(const SDLState &state, GameState &gs, const Resources &res, float deltaTime) {    
-    this->pos += this->vel * deltaTime;
+void Object::update(GameState &gs, const Resources &res, double tickRate) {    
+    this->pos += this->vel * (float)tickRate;
 }
 
 void Object::draw(const SDLState &state, GameState &gs, const Resources &res) {

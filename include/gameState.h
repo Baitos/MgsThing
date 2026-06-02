@@ -7,14 +7,19 @@
 #include "object.h"
 #include "player.h"
 
+// for future reference, make sure to not put raw points, file handlers, or non-copyables
+// we need to be able to restore previous gameStates for rollback to work
+
 struct GameState {    
     SDL_FRect mapViewport;
     bool debugMode;
 
     Player player;
-    std::vector<Object> mapTiles_;
-    std::vector<Object> fgTiles_;
+    std::vector<Object> mapTiles;
+    std::vector<Object> fgTiles;
+    
 
+    
     GameState(const SDLState &state, Resources &res) 
         : mapViewport {
             0.0f, 
@@ -27,6 +32,7 @@ struct GameState {
     {
         init(state, res);
     }
+    GameState() = default;
     void init(const SDLState &state, Resources &res);
     void loadMap(const SDLState& state, Resources& res, const std::string& path);
 };
