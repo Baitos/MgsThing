@@ -47,8 +47,7 @@ bool intersectAABB(const SDL_FRect &a, const SDL_FRect &b, glm::vec2 &overlap)
 	return false;
 }
 
-void Player::checkCollision(const SDLState &state, GameState &gs, const Resources &res,
- 	double tickRate)
+void Player::checkCollision(GameState &gs, const Resources &res, double tickRate)
 {
     SDL_FRect rectA {
 		.x = this->pos.x + this->collider.x,
@@ -65,12 +64,12 @@ void Player::checkCollision(const SDLState &state, GameState &gs, const Resource
 			.h = o.collider.h
 		};
 		if (intersectAABB(rectA, rectB, resolution) && o.solid) {
-			this->collisionResponse(state, gs, res, o, rectA, rectB, resolution, tickRate);
+			this->collisionResponse(gs, res, o, rectA, rectB, resolution, tickRate);
 		}
     }
 }
 
-void Player::collisionResponse(const SDLState &state, GameState &gs, const Resources &res,
+void Player::collisionResponse(GameState &gs, const Resources &res,
  	                           Object &o, SDL_FRect &rectA, SDL_FRect &rectB, glm::vec2 &resolution, double tickRate) {
     if (resolution.x < resolution.y) {	
         if (rectA.x < rectB.x) {

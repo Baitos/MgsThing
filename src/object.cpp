@@ -26,7 +26,7 @@ void Object::draw(const SDLState &state, GameState &gs, const Resources &res) {
 }
 
 void Object::drawDebug(const SDLState &state, GameState &gs) {
-    if (gs.debugMode && this->debug) {
+    if (gs.debugMode && this->debug && this->solid) {
         SDL_FRect rectA {
             .x = this->pos.x + this->collider.x - gs.mapViewport.x, 
             .y = this->pos.y + this->collider.y - gs.mapViewport.y,

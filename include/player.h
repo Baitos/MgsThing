@@ -24,6 +24,11 @@ enum direction {
     UL
 };
 
+struct directionTable {
+    int tileID;
+    bool flipSprite;
+};
+
 class Player : public Object {   
     public:
         float maxSpeed;
@@ -54,11 +59,11 @@ class Player : public Object {
             solid = true;
         }
         virtual ~Player() {}
-        virtual void update(const SDLState &state, GameState &gs, const Resources &res, double tickRate);
+        virtual void update(InputState inputs, GameState &gs, const Resources &res, double tickRate);
         void draw(const SDLState &state, GameState &gs, const Resources &res);
         void handleRotation(float angle, double tickRate, bool isStrafing);
-        void checkCollision(const SDLState &state, GameState &gs, const Resources &res,
+        void checkCollision(GameState &gs, const Resources &res,
  	                        double tickRate);
-        void collisionResponse(const SDLState &state, GameState &gs, const Resources &res,
+        void collisionResponse(GameState &gs, const Resources &res,
  	                           Object &o, SDL_FRect &rectA, SDL_FRect &rectB, glm::vec2 &resolution, double tickRate);
 };

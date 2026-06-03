@@ -17,9 +17,20 @@ void Player::handleRotation(float angle, double tickRate, bool isStrafing) {
     this->angle = std::fmod(this->angle + 360.0f, 360.0f); // normalize player angle
 }
 
-void Player::update(const SDLState &state, GameState &gs, const Resources &res, double tickRate) {
+// contains tileID of character on tileSet based on direction (and if the sprite should flip)
+const directionTable dirTable[8] = {
+    {4, false},
+    {5, false},
+    {6, false},
+    {7, false},
+    {8, false},
+    {7, true},
+    {6, true},
+    {5, true}
+};
+
+void Player::update(InputState inputs, GameState &gs, const Resources &res, double tickRate) {
     
-    InputState inputs = state.im.inputState;
     // do things based on inputs
     glm::vec2 inputDir(0.0f);
     if (inputs.current & Up) {
@@ -55,7 +66,7 @@ void Player::update(const SDLState &state, GameState &gs, const Resources &res, 
     } else {
         this->vel += glm::normalize(delta) * maxDelta;
     }
-    
+
     direction facing;
     if (glm::length(inputDir) == 0.0f) {
         facing = this->dir;
@@ -69,60 +80,12 @@ void Player::update(const SDLState &state, GameState &gs, const Resources &res, 
         this->dir = facing;
         
     }
-    //std::cout << "Facing: " << facing << " PlayerAngle: " << this->angle << std::endl;
-    switch (facing) {
-        case U:
-        {
-            this->tileId = 4;
-            flipSprite = false;
-            break;
-        }
-        case UR:
-        {
-            this->tileId = 5;
-            flipSprite = false;
-            break;
-        }
-        case R:
-        {
-            this->tileId = 6;
-            flipSprite = false;
-            break;
-        }
-        case DR:
-        {
-            this->tileId = 7;
-            flipSprite = false;
-            break;
-        }
-        case D:
-        {
-            this->tileId = 8;
-            flipSprite = false;
-            break;
-        }
-        case DL:
-        {
-            this->tileId = 7;
-            flipSprite = true;
-            break;
-        }
-        case L:
-        {
-            this->tileId = 6;
-            flipSprite = true; 
-            break;
-        }
-        case UL:
-        {
-            this->tileId = 5;
-            flipSprite = true; 
-            break;
-        }
-    }
+    // go to lookup table for sprite based on direction
+    this->tileId = dirTable[facing].tileID;
+    this->flipSprite = dirTable[facing].flipSprite;
 
     Object::update(gs, res, tickRate); // do generic update
-    this->checkCollision(state, gs, res, tickRate); // check collision
+    this->checkCollision(gs, res, tickRate); // check collision
 }
 
 void Player::draw(const SDLState &state, GameState &gs, const Resources &res) {
