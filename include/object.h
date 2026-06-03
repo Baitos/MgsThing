@@ -25,6 +25,7 @@ class Object { // generic obj type
         float width, height; // size for drawing
         bool debug; // should draw debug?
         objectType type;   
+        bool solid; // should player collide with them
 
         int tileId; // what sprite of the tile sheet should this object use?
         Object() {           
@@ -38,6 +39,7 @@ class Object { // generic obj type
             width = height = TILE_SIZE;
             tileId = BLANK_TILE;
             type = NO_TYPE;
+            solid = false;
             debug = true;
         }
         Object(glm::vec2 pos_) {
@@ -52,6 +54,7 @@ class Object { // generic obj type
             width = height = TILE_SIZE;
             tileId = BLANK_TILE;
             type = NO_TYPE;
+            solid = false;
             debug = true;
         }
 
@@ -67,6 +70,7 @@ class Object { // generic obj type
             };
             width = height = TILE_SIZE;
             type = NO_TYPE;
+            solid = false;
             debug = true;
         }
 
@@ -76,10 +80,12 @@ class Object { // generic obj type
             vel = acc = glm::vec2(0);
             tileId = BLANK_TILE;
             type = NO_TYPE;
+            solid = false;
             debug = true;
         }
         virtual ~Object() {}
         virtual void draw(const SDLState &state, GameState &gs, const Resources &res);
         void drawDebug(const SDLState &state, GameState &gs); 
+        void drawDebugNearby(const SDLState &state, GameState &gs);
         void update(GameState &gs, const Resources &res, double tickRate);
 };

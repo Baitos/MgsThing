@@ -39,4 +39,4 @@ struct SDLState
 bool initialize(SDLState &state);
 void cleanup(SDLState &state);
 
-void advanceTime(SDLState &state); // run tick logic
+void advanceTime(SDLState &state, double &accumulator); // run tick logic

@@ -27,7 +27,10 @@ void GameState::loadMap(const SDLState& state, Resources& res, const std::string
 
     int width = mapJson["width"];
     int height = mapJson["height"];
+    this->collidableTiles.resize(width * height);
 
+    this->mapWidth = width;
+    this->mapHeight = height;
     res.tileSetCols = mapJson["tilesets"][0]["columns"].get<int>(); // get amount of columns in tileSet for splitting
     for (auto& layer : mapJson["layers"])
     {
@@ -44,7 +47,11 @@ void GameState::loadMap(const SDLState& state, Resources& res, const std::string
                 if (layer["name"] == "Foreground") {
                     this->fgTiles.push_back(o);
                 } else {
+                    if (layer["name"] == "Walls") {
+                        o.solid = true;
+                    }
                     this->mapTiles.push_back(o);
+                    this->collidableTiles[r * width + c] = o;
                 }
             }          
         }

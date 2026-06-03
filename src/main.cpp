@@ -34,8 +34,7 @@ int main(int argc, char** argv) {
     double accumulator = 0.0;
     
     while (running) {
-        advanceTime(state);
-        accumulator += state.fs.deltaTime;
+        advanceTime(state, accumulator);
 
         input(state, gs);
         if (state.im.inputState.pressed & Save) { // testing purposes

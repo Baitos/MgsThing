@@ -41,6 +41,7 @@ class Player : public Object {
             angle = 0.0f;
             flipSprite = false;
             rotationSpeed = 360.0f; // should be half a second at 360 to turn around
+            solid = true;
         }
         Player(glm::vec2 pos_, int tileID_) : Object(pos_, tileID_) {
             maxSpeed = 250.0f;
@@ -50,9 +51,14 @@ class Player : public Object {
             angle = 0.0f;
             flipSprite = false;
             rotationSpeed = 360.0f;
+            solid = true;
         }
         virtual ~Player() {}
-        virtual void update(const InputState &inputs, GameState &gs, const Resources &res, double tickRate);
+        virtual void update(const SDLState &state, GameState &gs, const Resources &res, double tickRate);
         void draw(const SDLState &state, GameState &gs, const Resources &res);
-        void handleRotation(float angle, float tickRate, bool isStrafing);
+        void handleRotation(float angle, double tickRate, bool isStrafing);
+        void checkCollision(const SDLState &state, GameState &gs, const Resources &res,
+ 	                        double tickRate);
+        void collisionResponse(const SDLState &state, GameState &gs, const Resources &res,
+ 	                           Object &o, SDL_FRect &rectA, SDL_FRect &rectB, glm::vec2 &resolution, double tickRate);
 };

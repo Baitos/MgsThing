@@ -23,6 +23,9 @@ void draw(const SDLState& state, GameState& gs, Resources& res) {
         SDL_RenderDebugText(state.renderer, 5, 5,
                         std::format("FPS: {} X: {} Y: {}",  
                         static_cast<int>(state.fs.FPS), gs.player.pos.x, gs.player.pos.y).c_str());
+        for (Object &obj : gs.nearTiles) { // render near tiles
+            obj.drawDebugNearby(state, gs);
+        }                   
     }
 
 

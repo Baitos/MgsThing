@@ -50,7 +50,7 @@ void cleanup(SDLState &state) {
     SDL_Quit();
 }
 
-void advanceTime(SDLState &state) { // run deltaTime logic
+void advanceTime(SDLState &state, double &accumulator) { // run deltaTime logic
     FrameState &fs = state.fs;
     fs.prevTime = fs.nowTime;
     fs.nowTime = SDL_GetPerformanceCounter(); // take time from previous frame to calculate delta
@@ -69,4 +69,5 @@ void advanceTime(SDLState &state) { // run deltaTime logic
         fs.FPS = fs.frames;           
         fs.frames = 0;
     }
+    accumulator += state.fs.deltaTime;
 }

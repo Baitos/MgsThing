@@ -3,7 +3,7 @@
 #include "../include/gameState.h"
 #include <iostream>
 
-void Player::handleRotation(float angle, float tickRate, bool isStrafing) {
+void Player::handleRotation(float angle, double tickRate, bool isStrafing) {
     if (isStrafing) {
         return;
     }
@@ -17,8 +17,9 @@ void Player::handleRotation(float angle, float tickRate, bool isStrafing) {
     this->angle = std::fmod(this->angle + 360.0f, 360.0f); // normalize player angle
 }
 
-void Player::update(const InputState &inputs, GameState &gs, const Resources &res, double tickRate) {
+void Player::update(const SDLState &state, GameState &gs, const Resources &res, double tickRate) {
     
+    InputState inputs = state.im.inputState;
     // do things based on inputs
     glm::vec2 inputDir(0.0f);
     if (inputs.current & Up) {
@@ -54,9 +55,7 @@ void Player::update(const InputState &inputs, GameState &gs, const Resources &re
     } else {
         this->vel += glm::normalize(delta) * maxDelta;
     }
-
     
-
     direction facing;
     if (glm::length(inputDir) == 0.0f) {
         facing = this->dir;
@@ -123,7 +122,7 @@ void Player::update(const InputState &inputs, GameState &gs, const Resources &re
     }
 
     Object::update(gs, res, tickRate); // do generic update
-
+    this->checkCollision(state, gs, res, tickRate); // check collision
 }
 
 void Player::draw(const SDLState &state, GameState &gs, const Resources &res) {
