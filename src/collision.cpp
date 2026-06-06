@@ -12,12 +12,14 @@ Object GameState::getTileOnTileMap(int x, int y) {
     return this->tiles.collidableTiles[y * this->tiles.mapWidth + x];    // currently returns first layer
 }
 
-void GameState::getNearbyTilesOnTileMap(Player &p) {
+void GameState::getNearbyCollidableTilesOnTileMap(Player &p) {
     this->nearTiles.clear();
-    int left = (int)p.pos.x / TILE_SIZE;
-    int right = (int)(p.pos.x + p.collider.w) / TILE_SIZE;
-    int top = (int)p.pos.y / TILE_SIZE;
-    int bottom = (int)(p.pos.y + p.collider.h) / TILE_SIZE;
+    int posX = p.pos.x + p.collider.x;
+    int posY = p.pos.y + p.collider.y;
+    int left = posX / TILE_SIZE;
+    int right = (int)(posX + p.collider.w) / TILE_SIZE;
+    int top = posY / TILE_SIZE;
+    int bottom = (int)(posY + p.collider.h) / TILE_SIZE;
 
     for (int ty = top; ty <= bottom; ty++) {
         for (int tx = left; tx <= right; tx++) {
@@ -49,14 +51,14 @@ bool intersectAABB(const SDL_FRect &a, const SDL_FRect &b, glm::vec2 &overlap)
 
 void Player::checkCollision(GameState &gs, const Resources &res, double tickRate)
 {
-    SDL_FRect rectA {
-		.x = this->pos.x + this->collider.x,
-		.y = this->pos.y + this->collider.y,
-		.w = this->collider.w,
-		.h = this->collider.h
-	};
 	glm::vec2 resolution{ 0 };
 	for (auto &o : gs.nearTiles) { 
+        SDL_FRect rectA {
+            .x = this->pos.x + this->collider.x,
+            .y = this->pos.y + this->collider.y,
+            .w = this->collider.w,
+            .h = this->collider.h
+	    };
 		SDL_FRect rectB {
 			.x = o.pos.x + o.collider.x,
 			.y = o.pos.y + o.collider.y,

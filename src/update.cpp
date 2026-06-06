@@ -6,7 +6,7 @@
 #include <iostream>
 
 void update(const SDLState& state, GameState& gs, const Resources& res, Camera& cam, double tickRate) {
-    gs.getNearbyTilesOnTileMap(gs.player);
+    gs.getNearbyCollidableTilesOnTileMap(gs.player);
     gs.player.update(state.im.inputState, gs, res, tickRate);
     // set viewport based on player pos
     cam.x = (gs.player.pos.x + TILE_SIZE / 2) - (cam.w / 2); 

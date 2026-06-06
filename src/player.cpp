@@ -85,8 +85,12 @@ void Player::update(InputState inputs, GameState &gs, const Resources &res, doub
     this->tileId = dirTable[facing].tileID;
     this->flipSprite = dirTable[facing].flipSprite;
 
-    Object::update(gs, res, tickRate); // do generic update
-    this->checkCollision(gs, res, tickRate); // check collision
+    const int SUBSTEPS = 8; // maybe a bit excessive but this seems to work fine
+    double subTickRate = tickRate / SUBSTEPS;
+    for (int i = 0; i < SUBSTEPS; i++) {
+        Object::update(gs, res, subTickRate); // do generic update
+        this->checkCollision(gs, res, subTickRate); // check collision
+    }
 }
 
 void Player::draw(const SDLState &state, GameState &gs, const Resources &res, Camera& cam) {

@@ -32,31 +32,31 @@ struct directionTable {
 
 class Player : public Object {   
     public:
-        float maxSpeed;
-        bool isBeingMoved; // set to true if an input is being held
-        direction dir; // which way to face sprite
-        float angle; // angle player is facing
-        bool flipSprite; // should we flip the sprite?
-        float rotationSpeed; // how many degrees should the player character rotate in a second?
-
+        float maxSpeed = 250.0f;
+        bool isBeingMoved = false; // set to true if an input is being held
+        direction dir = U; // which way to face sprite
+        float angle = 0.0f; // angle player is facing
+        bool flipSprite = false; // should we flip the sprite?
+        float rotationSpeed = 360.0f; // how many degrees should the player character rotate in a second?
+        // should be half a second at 360 to turn around
         Player() : Object() {
-            maxSpeed = 250.0f;
-            isBeingMoved = false;
-            dir = U;
             type = OBJ_PLAYER;
-            angle = 0.0f;
-            flipSprite = false;
-            rotationSpeed = 360.0f; // should be half a second at 360 to turn around
             solid = true;
+            collider = {
+                .x = 3,
+                .y = 0,
+                .w = 26,
+                .h = (float)TILE_SIZE
+            };
         }
         Player(glm::vec2 pos_, int tileID_) : Object(pos_, tileID_) {
-            maxSpeed = 250.0f;
-            isBeingMoved = false;
-            dir = U;
             type = OBJ_PLAYER;
-            angle = 0.0f;
-            flipSprite = false;
-            rotationSpeed = 360.0f;
+            collider = {
+                .x = 3,
+                .y = 0,
+                .w = 26,
+                .h = (float)TILE_SIZE
+            };
             solid = true;
         }
         virtual ~Player() {}
