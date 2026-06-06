@@ -14,6 +14,7 @@ struct FrameState // anything related to deltaTime and fps
     uint64_t lastTime = 0;
     uint64_t nowTime = 0;
     float deltaTime = 0.0f;
+    double accumulator = 0.0;
 };
 
 struct SDLState
@@ -39,4 +40,4 @@ struct SDLState
 bool initialize(SDLState &state);
 void cleanup(SDLState &state);
 
-void advanceTime(SDLState &state, double &accumulator); // run tick logic
+void advanceTime(SDLState &state); // run tick logic

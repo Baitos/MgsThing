@@ -1,6 +1,7 @@
 #include "../include/object.h"
 #include "../include/state.h"
 #include "../include/gameState.h"
+#include "../include/camera.h"
 #include <iostream>
 
 void Player::handleRotation(float angle, double tickRate, bool isStrafing) {
@@ -88,7 +89,7 @@ void Player::update(InputState inputs, GameState &gs, const Resources &res, doub
     this->checkCollision(gs, res, tickRate); // check collision
 }
 
-void Player::draw(const SDLState &state, GameState &gs, const Resources &res) {
+void Player::draw(const SDLState &state, GameState &gs, const Resources &res, Camera& cam) {
     glm::vec2 tileSheetPos = glm::vec2(this->tileId % res.tileSetCols, this->tileId / res.tileSetCols);
     SDL_FRect src { // gets tile in tileSet
         .x = tileSheetPos.x * TILE_SIZE,
@@ -97,12 +98,12 @@ void Player::draw(const SDLState &state, GameState &gs, const Resources &res) {
         .h = this->height
     };
     SDL_FRect dst {
-        .x = this->pos.x - gs.mapViewport.x,
-        .y = this->pos.y - gs.mapViewport.y,
+        .x = this->pos.x - cam.x,
+        .y = this->pos.y - cam.y,
         .w = this->width,
         .h = this->height
     };
     SDL_FlipMode flipMode = this->flipSprite ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE; // flip sprite?
     SDL_RenderTextureRotated(state.renderer, res.tileSet, &src, &dst, 0, nullptr, flipMode);
-    this->drawDebug(state, gs);
+    this->drawDebug(state, gs, cam);
 }

@@ -8,12 +8,14 @@
 #include "resources.h"
 #include "globals.h"
 
+
 struct SDLState;
 struct GameState;
 struct Resources;
+class Camera;
 
 enum objectType {
-    NO_TYPE = 0,
+    NO_OBJ_TYPE = 0,
     OBJ_PLAYER,
     OBJ_LAND
 };
@@ -38,7 +40,7 @@ class Object { // generic obj type
             };
             width = height = TILE_SIZE;
             tileId = BLANK_TILE;
-            type = NO_TYPE;
+            type = NO_OBJ_TYPE;
             solid = false;
             debug = true;
         }
@@ -53,7 +55,23 @@ class Object { // generic obj type
             };
             width = height = TILE_SIZE;
             tileId = BLANK_TILE;
-            type = NO_TYPE;
+            type = NO_OBJ_TYPE;
+            solid = false;
+            debug = true;
+        }
+
+        Object(glm::vec2 pos_, int tileID_, objectType type_) {
+            pos = pos_;
+            vel = acc = glm::vec2(0);
+            tileId = tileID_;
+            collider = {
+                .x = 0,
+                .y = 0,
+                .w = (float)TILE_SIZE,
+                .h = (float)TILE_SIZE
+            };
+            width = height = TILE_SIZE;
+            type = type_;
             solid = false;
             debug = true;
         }
@@ -69,23 +87,12 @@ class Object { // generic obj type
                 .h = (float)TILE_SIZE
             };
             width = height = TILE_SIZE;
-            type = NO_TYPE;
-            solid = false;
-            debug = true;
-        }
-
-        Object(glm::vec2 pos_, SDL_FRect colliderRect) {
-            pos = pos_;       
-            collider = colliderRect;
-            vel = acc = glm::vec2(0);
-            tileId = BLANK_TILE;
-            type = NO_TYPE;
+            type = NO_OBJ_TYPE;
             solid = false;
             debug = true;
         }
         virtual ~Object() {}
-        virtual void draw(const SDLState &state, GameState &gs, const Resources &res);
-        void drawDebug(const SDLState &state, GameState &gs); 
-        void drawDebugNearby(const SDLState &state, GameState &gs);
+        virtual void draw(const SDLState &state, GameState &gs, const Resources &res, Camera& cam);
+        void drawDebug(const SDLState &state, GameState &gs, Camera& cam); 
         void update(GameState &gs, const Resources &res, double tickRate);
 };

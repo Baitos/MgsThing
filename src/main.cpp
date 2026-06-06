@@ -20,23 +20,24 @@
 
 #include "../include/object.h"
 #include "../include/player.h"
+#include "../include/camera.h"
 
 int main(int argc, char** argv) { 
     SDLState state;
     Resources res;
     // setup state, res 
     init(state, res);
+    // set up camera
+    Camera cam(state);
     // setup game state
     GameState gs(state, res);
     GameState snapshot = gs;
     // start game loop
     
-    double accumulator = 0.0;
-    
     while (running) {
-        advanceTime(state, accumulator);
-
+        advanceTime(state);
         input(state, gs);
+
         if (state.im.inputState.pressed & Save) { // testing purposes
             snapshot = gs;
         }
@@ -44,14 +45,13 @@ int main(int argc, char** argv) {
             gs = snapshot;
         }
 
-        while (accumulator >= TICK_RATE) {
-            update(state, gs, res, TICK_RATE);
-            accumulator -= TICK_RATE;
-
+        while (state.fs.accumulator >= TICK_RATE) {
+            update(state, gs, res, cam, TICK_RATE);
+            state.fs.accumulator -= TICK_RATE;
         }
         
-        double alpha = accumulator / TICK_RATE; // will be for lerping later
-        draw(state, gs, res);
+        double alpha = state.fs.accumulator / TICK_RATE; // will be for lerping later
+        draw(state, gs, res, cam);
     }
     
     res.unload();

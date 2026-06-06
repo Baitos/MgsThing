@@ -12,6 +12,7 @@
 struct SDLState;
 struct GameState;
 struct Resources;
+class Camera;
 
 enum direction {
     U,
@@ -60,7 +61,7 @@ class Player : public Object {
         }
         virtual ~Player() {}
         virtual void update(InputState inputs, GameState &gs, const Resources &res, double tickRate);
-        void draw(const SDLState &state, GameState &gs, const Resources &res);
+        void draw(const SDLState &state, GameState &gs, const Resources &res, Camera& cam);
         void handleRotation(float angle, double tickRate, bool isStrafing);
         void checkCollision(GameState &gs, const Resources &res,
  	                        double tickRate);

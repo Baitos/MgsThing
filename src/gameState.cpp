@@ -27,33 +27,44 @@ void GameState::loadMap(const SDLState& state, Resources& res, const std::string
 
     int width = mapJson["width"];
     int height = mapJson["height"];
-    this->collidableTiles.resize(width * height);
 
-    this->mapWidth = width;
-    this->mapHeight = height;
+    this->tiles.mapWidth = width;
+    this->tiles.mapHeight = height;
+
+    this->tiles.fgTiles.resize(width * height);
+    this->tiles.collidableTiles.resize(width * height);
+
+
     res.tileSetCols = mapJson["tilesets"][0]["columns"].get<int>(); // get amount of columns in tileSet for splitting
     for (auto& layer : mapJson["layers"])
     {
         //
+        bool isBackgroundTile = false; // 
+        std::vector<Object> tileLayer;
+        tileLayer.resize(width * height);
         for (int r = 0; r < height; r++) {
-            
             for (int c = 0; c < width; c++) {
                 int id = layer["data"][r * width + c].get<int>();
                 if (id == 0) { // don't make objects for blank tiles
                     continue;
                 }
                 // get position based on row/col
-                Object o(glm::vec2(c * TILE_SIZE, r * TILE_SIZE), id - 1);
+                Object o(glm::vec2(c * TILE_SIZE, r * TILE_SIZE), id - 1, OBJ_LAND);
                 if (layer["name"] == "Foreground") {
-                    this->fgTiles.push_back(o);
+                    this->tiles.fgTiles[r * width + c] = o; // only allows one fg layer for now but can be changed
                 } else {
                     if (layer["name"] == "Walls") {
                         o.solid = true;
+                        this->tiles.collidableTiles[r * width + c] = o;
+                    } else {
+                        tileLayer[r * width + c] = o;
+                        isBackgroundTile = true;
                     }
-                    this->mapTiles.push_back(o);
-                    this->collidableTiles[r * width + c] = o;
                 }
             }          
+        }
+        if (isBackgroundTile) {
+            this->tiles.mapTiles.push_back(tileLayer);
         }
     }
 }

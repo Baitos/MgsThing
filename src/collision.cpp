@@ -6,10 +6,10 @@
 #include "../include/globals.h"
 
 Object GameState::getTileOnTileMap(int x, int y) {
-    if (x < 0 || x >= this->mapWidth || y < 0 || y >= this->mapHeight) { // error bound
+    if (x < 0 || x >= this->tiles.mapWidth || y < 0 || y >= this->tiles.mapHeight) { // error bound
         return Object();
     }
-    return this->collidableTiles[y * this->mapWidth + x];    
+    return this->tiles.collidableTiles[y * this->tiles.mapWidth + x];    // currently returns first layer
 }
 
 void GameState::getNearbyTilesOnTileMap(Player &p) {

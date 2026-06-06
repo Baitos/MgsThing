@@ -10,26 +10,24 @@
 // for future reference, make sure to not put raw points, file handlers, or non-copyables
 // we need to be able to restore previous gameStates for rollback to work
 
+struct TileMap {
+    std::vector<std::vector<Object>> mapTiles; // vector of width x height vectors (per layer)
+    std::vector<Object> collidableTiles;
+    std::vector<Object> fgTiles;
+    int mapWidth = 0; // width of map in tiles
+    int mapHeight = 0; // height of map in tiles
+};
+
 struct GameState {    
-    SDL_FRect mapViewport;
     bool debugMode;
 
     Player player;
-    std::vector<Object> mapTiles; 
-    std::vector<Object> collidableTiles; // width * height for spatial access for collision purposes
-    std::vector<Object> fgTiles;
+    TileMap tiles; // width * height for spatial access for collision purposes
     
     std::vector<Object> nearTiles;
-    int mapWidth = 0; // width of map in tiles
-    int mapHeight = 0; // height of map in tiles
     
     GameState(const SDLState &state, Resources &res) 
-        : mapViewport {
-            0.0f, 
-            0.0f,
-            (float)state.logW,
-            (float)state.logH
-        },
+        :
         debugMode(false),
         player(glm::vec2(0.f), 4)
     {

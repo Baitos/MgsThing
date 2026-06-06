@@ -7,8 +7,8 @@ public:
     Timer(){}
     Timer(float length) : length(length), time(0), timeout(false) {
     }
-    bool step(float deltaTime) {
-        time += deltaTime;
+    bool step(double tickRate) {
+        time += tickRate;
         if (time >= length) {
             time -= length;
             timeout = true;
