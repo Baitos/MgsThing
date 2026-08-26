@@ -22,74 +22,39 @@ enum objectType {
 
 class Object { // generic obj type    
     public:
-        glm::vec2 pos, vel, acc;
-        SDL_FRect collider; // rectangle for collision
-        float width, height; // size for drawing
-        bool debug; // should draw debug?
-        objectType type;   
-        bool solid; // should player collide with them
+        glm::vec2 pos, vel, acc = glm::vec2(0.0f);
+        SDL_FRect collider = {
+            .x = 0,
+            .y = 0,
+            .w = (float)TILE_SIZE,
+            .h = (float)TILE_SIZE
+        }; // rectangle for collision
+        float width = TILE_SIZE;
+        float height = TILE_SIZE; // size for drawing
+        bool debug = true; // should draw debug?
+        objectType type = NO_OBJ_TYPE;   
+        bool solid = false; // should player collide with them
+
 
         int tileId; // what sprite of the tile sheet should this object use?
+        int tileIdOffset = 0; // if animated, how far off from the original sprite should we move?
         Object() {           
-            pos = vel = acc = glm::vec2(0);
-            collider = {
-                .x = 0,
-                .y = 0,
-                .w = (float)TILE_SIZE,
-                .h = (float)TILE_SIZE
-            };
-            width = height = TILE_SIZE;
             tileId = BLANK_TILE;
-            type = NO_OBJ_TYPE;
-            solid = false;
-            debug = true;
         }
         Object(glm::vec2 pos_) {
             pos = pos_;
-            vel = acc = glm::vec2(0);
-            collider = {
-                .x = 0,
-                .y = 0,
-                .w = (float)TILE_SIZE,
-                .h = (float)TILE_SIZE
-            };
-            width = height = TILE_SIZE;
             tileId = BLANK_TILE;
-            type = NO_OBJ_TYPE;
-            solid = false;
-            debug = true;
         }
 
         Object(glm::vec2 pos_, int tileID_, objectType type_) {
             pos = pos_;
-            vel = acc = glm::vec2(0);
             tileId = tileID_;
-            collider = {
-                .x = 0,
-                .y = 0,
-                .w = (float)TILE_SIZE,
-                .h = (float)TILE_SIZE
-            };
-            width = height = TILE_SIZE;
             type = type_;
-            solid = false;
-            debug = true;
         }
 
         Object(glm::vec2 pos_, int tileID_) {
             pos = pos_;
-            vel = acc = glm::vec2(0);
             tileId = tileID_;
-            collider = {
-                .x = 0,
-                .y = 0,
-                .w = (float)TILE_SIZE,
-                .h = (float)TILE_SIZE
-            };
-            width = height = TILE_SIZE;
-            type = NO_OBJ_TYPE;
-            solid = false;
-            debug = true;
         }
         virtual ~Object() {}
         virtual void draw(const SDLState &state, GameState &gs, const Resources &res, Camera& cam);

@@ -2,7 +2,33 @@
 #include "../include/state.h"
 #include "../include/gameState.h"
 #include "../include/camera.h"
+#include "../include/playerState.h"
 #include <iostream>
+
+Player::Player(glm::vec2 pos_, int tileID_) : Object(pos_, tileID_) {
+    type = OBJ_PLAYER;
+    vel = acc = glm::vec2(0);
+    solid = true;
+    collider = {
+        .x = 3,
+        .y = 0,
+        .w = 26,
+        .h = (float)TILE_SIZE
+    };
+    playerState = &States::idle; // fsm again, start in idle
+}
+
+Player::Player() : Object() {
+    type = OBJ_PLAYER;
+    solid = true;
+    collider = {
+        .x = 3,
+        .y = 0,
+        .w = 26,
+        .h = (float)TILE_SIZE
+    };
+    playerState = &States::idle; // fsm again, start in idle
+}
 
 void Player::handleRotation(float angle, double tickRate, bool isStrafing) {
     if (isStrafing) {
@@ -18,73 +44,10 @@ void Player::handleRotation(float angle, double tickRate, bool isStrafing) {
     this->angle = std::fmod(this->angle + 360.0f, 360.0f); // normalize player angle
 }
 
-// contains tileID of character on tileSet based on direction (and if the sprite should flip)
-const directionTable dirTable[8] = {
-    {4, false},
-    {5, false},
-    {6, false},
-    {7, false},
-    {8, false},
-    {7, true},
-    {6, true},
-    {5, true}
-};
-
-void Player::update(InputState inputs, GameState &gs, const Resources &res, double tickRate) {
+void Player::update(InputState &inputs, GameState &gs, const Resources &res, double tickRate) {
+    PlayerState* pState = this->playerState->update(inputs, gs, res, (*this), tickRate);
+    this->handleState(pState, gs, res);
     
-    // do things based on inputs
-    glm::vec2 inputDir(0.0f);
-    if (inputs.current & Up) {
-        inputDir.y -= 1.0f;
-    }
-    if (inputs.current & Down) {
-        inputDir.y += 1.0f;
-    }
-    if (inputs.current & Left) {
-        inputDir.x -= 1.0f;
-    }
-    if (inputs.current & Right) {
-        inputDir.x += 1.0f;
-    }
-
-    if (glm::dot(inputDir, inputDir) > 0.0f) { // normalize for diagonal movement
-        inputDir = glm::normalize(inputDir);
-    }
-
-    // accelerate towards max velocity in inputted direction
-    glm::vec2 desiredVel = inputDir * this->maxSpeed;
-
-    if (inputs.current & Lock) { // if locked, we want to slow down
-        desiredVel = glm::vec2(0.0f);
-    }
-
-    glm::vec2 delta = desiredVel - this->vel;
-    float distance = glm::length(delta);
-    float maxDelta = this->acc.x * tickRate;
-
-    if (distance <= maxDelta) {
-        this->vel = desiredVel;
-    } else {
-        this->vel += glm::normalize(delta) * maxDelta;
-    }
-
-    direction facing;
-    if (glm::length(inputDir) == 0.0f) {
-        facing = this->dir;
-    } else {
-        // find desired angle
-        float angle = glm::degrees(std::atan2(inputDir.x, -inputDir.y));
-        angle = std::fmod(angle + 360.0f, 360.0f); // normalize
-
-        this->handleRotation(angle, tickRate, inputs.current & Strafe); // if not strafing, rotate
-        facing = static_cast<direction>(static_cast<int>((this->angle + 22.5f) / 45.0f) % 8); // get direction
-        this->dir = facing;
-        
-    }
-    // go to lookup table for sprite based on direction
-    this->tileId = dirTable[facing].tileID;
-    this->flipSprite = dirTable[facing].flipSprite;
-
     const int SUBSTEPS = 8; // maybe a bit excessive but this seems to work fine
     double subTickRate = tickRate / SUBSTEPS;
     for (int i = 0; i < SUBSTEPS; i++) {
@@ -110,4 +73,13 @@ void Player::draw(const SDLState &state, GameState &gs, const Resources &res, Ca
     SDL_FlipMode flipMode = this->flipSprite ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE; // flip sprite?
     SDL_RenderTextureRotated(state.renderer, res.tileSet, &src, &dst, 0, nullptr, flipMode);
     this->drawDebug(state, gs, cam);
+}
+
+void Player::handleState(PlayerState* &pState, GameState &gs, const Resources &res) {
+    if (pState == nullptr) {
+        return;
+    }
+    this->playerState->exit(gs, res, (*this)); // exit fn for old state
+    this->playerState = pState;
+    this->playerState->enter(gs, res, (*this)); // enter fn for new state
 }
