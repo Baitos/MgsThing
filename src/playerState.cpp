@@ -103,7 +103,7 @@ void WalkState::enter(GameState &gs, const Resources &res, Player &p) {
 }
 
 PlayerState* LockState::update(InputState &inputs, GameState &gs, const Resources &res, Player &p, double tickRate) {
-    if (inputs.released & Lock) { // if you let go, release lock state
+    if (!(inputs.current & Lock)) { // if you let go, release lock state
         return &States::walk;
     }
     

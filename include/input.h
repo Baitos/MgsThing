@@ -25,15 +25,10 @@ struct InputState {
     uint32_t released = 0;
 };
 
-struct inputTable {
-    SDL_Scancode key;
-    Inputs input;
-};
-
 class InputManager {
     public:
         InputState inputState; 
-        void handleInput(SDL_Scancode& key, bool keyDown); 
+        void handleInput(const bool *keys); 
 };
 
 void input(SDLState& state, GameState& gs);
