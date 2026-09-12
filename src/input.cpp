@@ -5,7 +5,14 @@
 #include "../include/input.h"
 #include "../include/state.h"
 
+#include <bitset>
+#include <iostream>
+
 void input(SDLState& state, GameState& gs) {
+    InputState& is = state.im.inputState;
+    uint32_t previous = is.current; // save prev frame
+    //is.pressed = is.released = 0;
+    
     SDL_Event event { 0 };
     while (SDL_PollEvent(&event)) {
         switch (event.type) {
@@ -30,50 +37,59 @@ void input(SDLState& state, GameState& gs) {
                 else if (event.key.scancode == SDL_SCANCODE_F1) {
                     running = false;
                 }
-                
+                state.im.handleInput(event.key.scancode, true); // add current input
+                // newly pressed buttons are anything current and anything not previously pressed
+                //is.pressed |= is.current & ~previous;
+                //previous = is.current; // update previous
+                break;
+            }
+            case SDL_EVENT_KEY_UP:
+            {
+                state.im.handleInput(event.key.scancode, false); // remove inputs
+                // newly released buttons are anything previous and currently not held
+                //is.released |= previous & ~is.current;
+                //previous = is.current; // update previous
                 break;
             }
         }
     }
-    state.im.handleInput(state.keys);
+
+    //is.pressed = is.current & ~previous;
+    //is.released = previous & ~is.current;
+    std::cout << "current:  " << std::bitset<8>(is.current) << "\npressed:  " << std::bitset<8>(is.pressed) << "\nreleased: " << std::bitset<8>(is.released) << "\n\n";
+    //state.im.handleInput(state.keys);
 }
 
-void InputManager::handleInput(const bool *keys) {
-    InputState& is = this->inputState;
-    uint32_t previous = is.current; // save prev frame
-    
-    is.current = 0; // reset current inputs
+void useInput(SDLState& state, GameState& gs) {
 
-    // using bitwise, add current inputs as bits 
-    if (keys[SDL_SCANCODE_W]) {
-        is.current |= Up; 
-    }
-    if (keys[SDL_SCANCODE_S]) {
-        is.current |= Down;
-    }
-    if (keys[SDL_SCANCODE_A]) {
-        is.current |= Left;
-    }
-    if (keys[SDL_SCANCODE_D]) {
-        is.current |= Right;
-    }
-    if (keys[SDL_SCANCODE_LSHIFT]) {
-        is.current |= Strafe;
-    }
-    if (keys[SDL_SCANCODE_LCTRL]) {
-        is.current |= Lock;
-    }
+}
 
-    if (keys[SDL_SCANCODE_F2]) { // testing purposes
-        is.current |= Save;
-    }
-    if (keys[SDL_SCANCODE_F3]) {
-        is.current |= Restore;
-    }
+const inputTable inpTable[] = {
+    {SDL_SCANCODE_W, Up},
+    {SDL_SCANCODE_S, Down},
+    {SDL_SCANCODE_A, Left},
+    {SDL_SCANCODE_D, Right},
+    {SDL_SCANCODE_LSHIFT, Strafe},
+    {SDL_SCANCODE_LCTRL, Lock},
+    {SDL_SCANCODE_F2, Save},
+    {SDL_SCANCODE_F3, Restore}
+};
 
-    // newly pressed buttons are anything current and anything not previously pressed
-    is.pressed = is.current & ~previous;
 
-    // newly released buttons are anything previous and currently not held
-    is.released = previous & ~is.current;
+
+void InputManager::handleInput(SDL_Scancode& key, bool keyDown) {
+
+    for (int i = 0; i < std::size(inpTable); i++) {
+        if (key == inpTable[i].key) {
+            if (keyDown) {
+                this->inputState.current |= inpTable[i].input; // add input
+
+                this->inputState.pressed |= inpTable[i].input; // add to pressed
+            } else {
+                this->inputState.current &= ~inpTable[i].input; // remove input
+
+                this->inputState.released |= inpTable[i].input; // add to released
+            }
+        }
+    }
 }

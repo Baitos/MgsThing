@@ -12,5 +12,5 @@ void update(SDLState& state, GameState& gs, const Resources& res, Camera& cam, d
     cam.x = (gs.player.pos.x + TILE_SIZE / 2) - (cam.w / 2); 
     cam.y = (gs.player.pos.y + TILE_SIZE / 2) - (cam.h / 2); 
     //std::cout << cam.x << " " << cam.y << std::endl;
-
+    state.im.inputState.pressed = state.im.inputState.released = 0; // reset input state
 }
