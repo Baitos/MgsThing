@@ -41,7 +41,7 @@ int main(int argc, char** argv) {
         if (state.im.inputState.pressed & Save) { // testing purposes
             snapshot = gs;
         }
-        else if (state.im.inputState.pressed & Restore) {
+        else if (state.im.inputState.pressed & Restore) { // testing purposes
             gs = snapshot;
         }
 
